@@ -1,10 +1,20 @@
+import { useState } from 'react';
 import Landing from './components/Landing';
+import Quiz from './components/Quiz';
 import "./App.css";
 
 function App() {
+  const [quizStarted, setQuizStarted] = useState(false);
+
+  function startQuiz() {
+    setQuizStarted(true);
+    document.body.classList.add('blob-move');
+  }
+
   return (
     <div className='App'>
-      <Landing />
+      {!quizStarted && <Landing quizStarted={startQuiz} />}
+      {quizStarted && <Quiz />}
     </div>
   );
 }

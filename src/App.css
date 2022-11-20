@@ -14,7 +14,17 @@ body {
   background-image: url("blobs1.svg"), url("blobs2.svg");
   background-repeat: no-repeat;
   background-position: bottom left, top right;
-  background-size: 25% 25%, 40% 40%;
+  background-size: 30% 30%, 45% 45%;
+}
+
+.blob-move {
+  animation: blob-resize 1s forwards;
+}
+
+@keyframes blob-resize {
+  100% {
+    background-size: 20% 20%, 35% 35%;
+  }
 }
 
 #root, .App {
@@ -57,4 +67,12 @@ body {
   font-weight: 500;
   cursor: pointer;
   margin-top: 15px;
+}
+
+.landing--button:hover {
+  background: #293264;
+}
+
+.landing--button:active {
+  transform: scale(0.95);
 }
