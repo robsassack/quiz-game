@@ -76,3 +76,8 @@ body {
 .landing--button:active {
   transform: scale(0.95);
 }
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+}
