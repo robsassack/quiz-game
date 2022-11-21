@@ -36,13 +36,13 @@ function Quiz() {
   }, [questionData]);
 
   const questionElements = questions.map((question) => (
-    <div key={question.id}>
-      <h2>{question.question}</h2>
-      <ul>
+    <div key={question.id} className="quiz--question-container">
+      <h2 className="quiz--question">{question.question}</h2>
+      <ul className="quiz--answer-list">
         {question.answers.map((answer) => (
           <div className="quiz--answer" key={nanoid()}>
-            <input type="radio" id={answer} name={question.id} value={answer} />
-            <label htmlFor={answer}>{answer}</label>
+            <input className="quiz--answer-option" type="radio" id={answer} name={question.id} value={answer} />
+            <label htmlFor={answer} className="quiz--answer-label">{answer}</label>
           </div>
         ))}
       </ul>
@@ -52,7 +52,7 @@ function Quiz() {
   return (
     <div className='quiz'>
       {questionElements}
-      <button>Check answers</button>
+      <button className="quiz--answer-button">Check answers</button>
     </div>
   );
 }

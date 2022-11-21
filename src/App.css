@@ -81,3 +81,59 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.quiz--question-container {
+  border-bottom: 1px solid #DBDEF0;
+  padding: 20px 0 32px 0;
+}
+
+.quiz--question {
+  font-family: "Karla", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: #293264;
+  padding-bottom: 20px;
+}
+
+.quiz--answer-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.quiz--answer-list input[type="radio"] {
+  left: -999em;
+  position: absolute;
+}
+
+.quiz--answer-list input[type="radio"]:checked+label {
+  background: #D6DBF5;
+  outline: none;
+}
+
+.quiz--answer-label {
+  outline: 2px solid #4D5B9E;
+  border-radius: 10px;
+  padding: 5px 15px;
+  color: #293264;
+  font-weight: 500;
+}
+
+.quiz--answer-label:active {
+  background-color: #adb2cc;
+}
+
+.quiz--answer-button {
+  margin-top: 20px;
+  align-self: center;
+  padding: 15px 25px;
+  background-color: #4D5B9E;
+  border-radius: 10px;
+  border: none;
+  color: #F5F7FB;
+  font-weight: 600;
+}
+
+.quiz--answer-button:active {
+  transform: scale(0.95);
+  background-color: #293264;
+}
