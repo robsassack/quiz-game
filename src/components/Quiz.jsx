@@ -12,8 +12,8 @@ function Quiz() {
   }, []);
 
   function shuffle(array) {
-    for (let i=array.length-1; i>0; i--) {
-      let x = Math.floor(Math.random() * (i+1));
+    for (let i = array.length - 1; i > 0; i--) {
+      let x = Math.floor(Math.random() * (i + 1));
       let temp = array[i];
       array[i] = array[x];
       array[x] = temp;
@@ -24,7 +24,10 @@ function Quiz() {
   useEffect(() => {
     if (!questionData) return;
     const newQuestions = questionData.map((question) => {
-      const answers = shuffle([...question.incorrect_answers, question.correct_answer]);
+      const answers = shuffle([
+        ...question.incorrect_answers,
+        question.correct_answer,
+      ]);
       return {
         id: nanoid(),
         question: question.question,
@@ -36,13 +39,21 @@ function Quiz() {
   }, [questionData]);
 
   const questionElements = questions.map((question) => (
-    <div key={question.id} className="quiz--question-container">
-      <h2 className="quiz--question">{question.question}</h2>
-      <ul className="quiz--answer-list">
+    <div key={question.id} className='quiz--question-container'>
+      <h2 className='quiz--question'>{question.question}</h2>
+      <ul className='quiz--answer-list'>
         {question.answers.map((answer) => (
-          <div className="quiz--answer" key={nanoid()}>
-            <input className="quiz--answer-option" type="radio" id={answer} name={question.id} value={answer} />
-            <label htmlFor={answer} className="quiz--answer-label">{answer}</label>
+          <div className='quiz--answer' key={nanoid()}>
+            <input
+              className='quiz--answer-option'
+              type='radio'
+              id={answer}
+              name={question.id}
+              value={answer}
+            />
+            <label htmlFor={answer} className='quiz--answer-label'>
+              {answer}
+            </label>
           </div>
         ))}
       </ul>
@@ -52,7 +63,7 @@ function Quiz() {
   return (
     <div className='quiz'>
       {questionElements}
-      <button className="quiz--answer-button">Check answers</button>
+      <button className='quiz--answer-button'>Check answers</button>
     </div>
   );
 }
