@@ -34,7 +34,8 @@ body {
 .App {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+  padding: 20px;
 }
 
 .landing {
@@ -84,7 +85,8 @@ body {
 
 .quiz--question-container {
   border-bottom: 1px solid #DBDEF0;
-  padding: 20px 0 32px 0;
+  padding: 20px 20px 32px 20px;
+  max-width: 700px;
 }
 
 .quiz--question {

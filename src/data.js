@@ -21,6 +21,16 @@ const data = {
         "opt a", "opt b", "opt c"
       ]
     },
+    {
+      category: "Main",
+      type: "multiple",
+      difficulty: "hard",
+      question: "Long question with many words to test the layout",
+      correct_answer: "Answer #3",
+      incorrect_answers: [
+        "long option a", "long option b", "long option c"
+      ]
+    }
   ]
 }
 
