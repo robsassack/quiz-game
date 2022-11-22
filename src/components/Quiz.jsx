@@ -6,6 +6,7 @@ import data from "../data.js";
 function Quiz() {
   const [questionData, setQuestionData] = useState();
   const [questions, setQuestions] = useState([]);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     setQuestionData(data.results);
@@ -38,6 +39,13 @@ function Quiz() {
     setQuestions(newQuestions);
   }, [questionData]);
 
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setFormData(prevFormData => {
+      return {...prevFormData, [name]: value};
+    })
+  }
+
   const questionElements = questions.map((question) => (
     <div key={question.id} className='quiz--question-container'>
       <h2 className='quiz--question'>{question.question}</h2>
@@ -50,6 +58,8 @@ function Quiz() {
               id={answer}
               name={question.id}
               value={answer}
+              onChange={handleChange}
+              checked={formData[question.id] === answer}
             />
             <label htmlFor={answer} className='quiz--answer-label'>
               {answer}
@@ -60,10 +70,19 @@ function Quiz() {
     </div>
   ));
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(formData);
+  }
+
   return (
     <div className='quiz'>
-      {questionElements}
-      <button className='quiz--answer-button'>Check answers</button>
+      <form onSubmit={handleSubmit}>
+        {questionElements}
+        <div className="quiz--button-container">
+        <button className='quiz--answer-button'>Check answers</button>
+        </div>
+      </form>
     </div>
   );
 }

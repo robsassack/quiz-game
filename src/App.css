@@ -124,9 +124,13 @@ body {
   background-color: #adb2cc;
 }
 
+.quiz--button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .quiz--answer-button {
   margin-top: 20px;
-  align-self: center;
   padding: 15px 25px;
   background-color: #4D5B9E;
   border-radius: 10px;
