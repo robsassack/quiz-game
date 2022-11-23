@@ -47,7 +47,6 @@ function Quiz() {
   }, [questionData]);
 
   function getNewQuestions() {
-    console.log('test');
     async function getQuestions() {
       const resp = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
       const data = await resp.json();

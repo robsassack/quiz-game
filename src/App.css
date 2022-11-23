@@ -34,13 +34,13 @@ body {
 .App {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   padding: 20px;
 }
 
 .landing {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
