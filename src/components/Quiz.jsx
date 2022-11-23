@@ -25,9 +25,9 @@ function Quiz() {
   }
 
   const decodeHtmlEntity = function(str) {
-    return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
-      return String.fromCharCode(charCode);
-    });
+    const txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
   };
 
   useEffect(() => {
