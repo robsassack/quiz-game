@@ -24,6 +24,12 @@ function Quiz() {
     return array;
   }
 
+  const decodeHtmlEntity = function(str) {
+    return str.replace(/(&#(\d+);)/g, function(match, capture, charCode) {
+      return String.fromCharCode(charCode);
+    });
+  };
+
   useEffect(() => {
     if (!questionData) return;
     const newQuestions = questionData.map((question) => {
@@ -42,8 +48,13 @@ function Quiz() {
   }, [questionData]);
 
   function getNewQuestions() {
-    setQuestionData('');
-    setQuestionData(data.results);
+    console.log('test');
+    async function getQuestions() {
+      const resp = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
+      const data = await resp.json();
+      setQuestionData(data.results);
+    }
+    getQuestions();
   }
 
   function handleChange(e) {
@@ -55,7 +66,7 @@ function Quiz() {
 
   const questionElements = questions.map((question) => (
     <div key={question.id} className='quiz--question-container'>
-      <h2 className='quiz--question'>{question.question}</h2>
+      <h2 className='quiz--question'>{decodeHtmlEntity(question.question)}</h2>
       <ul className='quiz--answer-list'>
         {question.answers.map((answer) => (
           <div className='quiz--answer' key={nanoid()}>
@@ -69,7 +80,7 @@ function Quiz() {
               checked={formData[question.id] === answer}
             />
             <label htmlFor={answer} className='quiz--answer-label'>
-              {answer}
+              {decodeHtmlEntity(answer)}
             </label>
           </div>
         ))}
@@ -81,23 +92,23 @@ function Quiz() {
     const isCorrect = question.correctAnswer === formData[question.id];
     return (
       <div key={question.id} className='quiz--question-container'>
-        <h2 className='quiz--question'>{question.question}</h2>
-        <p className='quiz--answer-list'>
+        <h2 className='quiz--question'>{decodeHtmlEntity(question.question)}</h2>
+        <div className='quiz--answer-list' key={nanoid()}>
           {question.answers.map((answer) => {
               if (answer === question.correctAnswer) {
                 return (
-                  <div className="quiz--correct-answer">{answer}</div>
+                  <div className="quiz--correct-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
                 )
               } else if (answer === formData[question.id]) {
                 return (
-                  <div className="quiz--wrong-answer">{answer}</div>
+                  <div className="quiz--wrong-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
                 )
               }
               return (
-                <div className="quiz--regular-answer">{answer}</div>
+                <div className="quiz--regular-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
               )
             })}
-        </p>
+        </div>
       </div>
     );
   });
@@ -119,6 +130,7 @@ function Quiz() {
 
   function resetGame() {
     // get new questions
+    setQuestions([]);
     setFormData({});
     setNumCorrect(0);
     setShowResults(false);
