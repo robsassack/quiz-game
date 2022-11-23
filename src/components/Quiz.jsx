@@ -11,7 +11,7 @@ function Quiz() {
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    setQuestionData(data.results);
+    getNewQuestions();
   }, []);
 
   function shuffle(array) {
@@ -40,6 +40,11 @@ function Quiz() {
     });
     setQuestions(newQuestions);
   }, [questionData]);
+
+  function getNewQuestions() {
+    setQuestionData('');
+    setQuestionData(data.results);
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -72,6 +77,31 @@ function Quiz() {
     </div>
   ));
 
+  const answerElements = questions.map((question) => {
+    const isCorrect = question.correctAnswer === formData[question.id];
+    return (
+      <div key={question.id} className='quiz--question-container'>
+        <h2 className='quiz--question'>{question.question}</h2>
+        <p className='quiz--answer-list'>
+          {question.answers.map((answer) => {
+              if (answer === question.correctAnswer) {
+                return (
+                  <div className="quiz--correct-answer">{answer}</div>
+                )
+              } else if (answer === formData[question.id]) {
+                return (
+                  <div className="quiz--wrong-answer">{answer}</div>
+                )
+              }
+              return (
+                <div className="quiz--regular-answer">{answer}</div>
+              )
+            })}
+        </p>
+      </div>
+    );
+  });
+
   function handleSubmit(event) {
     event.preventDefault();
     // not all questions answered
@@ -92,6 +122,7 @@ function Quiz() {
     setFormData({});
     setNumCorrect(0);
     setShowResults(false);
+    getNewQuestions();
   }
 
   return (
@@ -106,12 +137,10 @@ function Quiz() {
       )}
       {showResults && (
         <div className='quiz--results'>
-          <h2 className='quiz--results-header'>Results</h2>
-          <p className='quiz--results-text'>
-            You got {numCorrect} out of {questions.length} questions correct.
-          </p>
+          {answerElements}
           <div className='quiz--button-container'>
-            <button className='quiz--answer-button' onClick={resetGame}>Play again!</button>
+            <p className="quiz--correct-stat">You scored {numCorrect}/{questions.length} correct answers</p>
+            <button className='quiz--answer-button' onClick={resetGame}>Play again</button>
           </div>
         </div>
       )}
