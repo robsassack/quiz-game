@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 // sample data for quiz, real questions will be fetched from api
-import data from "../data.js";
 
 function Quiz() {
   const [questionData, setQuestionData] = useState();
