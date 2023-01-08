@@ -11,7 +11,7 @@ html, body {
 
 body {
   background-color: #F5F7FB;
-  background-image: url("blobs1.svg"), url("blobs2.svg");
+  background-image: url("./assets/blobs1.svg"), url("./assets/blobs2.svg");
   background-repeat: no-repeat;
   background-position: bottom left, top right;
   background-size: 30% 30%, 45% 45%;
