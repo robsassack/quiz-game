@@ -23,8 +23,8 @@ function Quiz() {
     return array;
   }
 
-  const decodeHtmlEntity = function(str) {
-    const txt = document.createElement('textarea');
+  const decodeHtmlEntity = function (str) {
+    const txt = document.createElement("textarea");
     txt.innerHTML = str;
     return txt.value;
   };
@@ -48,40 +48,42 @@ function Quiz() {
 
   function getNewQuestions() {
     async function getQuestions() {
-      const resp = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
+      const resp = await fetch("https://opentdb.com/api.php?amount=5");
       const data = await resp.json();
       setQuestionData(data.results);
     }
     getQuestions();
   }
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => {
-      return { ...prevFormData, [name]: value };
-    });
+  function handleChange(e, question) {
+    const newFormData = { ...formData };
+    newFormData[question] = e.target.value;
+    setFormData(newFormData);
   }
 
   const questionElements = questions.map((question) => (
     <div key={question.id} className='quiz--question-container'>
       <h2 className='quiz--question'>{decodeHtmlEntity(question.question)}</h2>
       <ul className='quiz--answer-list'>
-        {question.answers.map((answer) => (
-          <div className='quiz--answer' key={nanoid()}>
-            <input
-              className='quiz--answer-option'
-              type='radio'
-              id={answer}
-              name={question.id}
-              value={answer}
-              onChange={handleChange}
-              checked={formData[question.id] === answer}
-            />
-            <label htmlFor={answer} className='quiz--answer-label'>
-              {decodeHtmlEntity(answer)}
-            </label>
-          </div>
-        ))}
+        {question.answers.map((answer) => {
+          const answerId = nanoid();
+          return (
+            <div className='quiz--answer' key={nanoid()}>
+              <input
+                className='quiz--answer-option'
+                type='radio'
+                id={answerId}
+                name={answerId}
+                value={answer}
+                onChange={(e) => handleChange(e, question.id)}
+                checked={formData[question.id] === answer}
+              />
+              <label htmlFor={answerId} className='quiz--answer-label'>
+                {decodeHtmlEntity(answer)}
+              </label>
+            </div>
+          );
+        })}
       </ul>
     </div>
   ));
@@ -90,22 +92,30 @@ function Quiz() {
     const isCorrect = question.correctAnswer === formData[question.id];
     return (
       <div key={question.id} className='quiz--question-container'>
-        <h2 className='quiz--question'>{decodeHtmlEntity(question.question)}</h2>
+        <h2 className='quiz--question'>
+          {decodeHtmlEntity(question.question)}
+        </h2>
         <div className='quiz--answer-list' key={nanoid()}>
           {question.answers.map((answer) => {
-              if (answer === question.correctAnswer) {
-                return (
-                  <div className="quiz--correct-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
-                )
-              } else if (answer === formData[question.id]) {
-                return (
-                  <div className="quiz--wrong-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
-                )
-              }
+            if (answer === question.correctAnswer) {
               return (
-                <div className="quiz--regular-answer" key={nanoid()}>{decodeHtmlEntity(answer)}</div>
-              )
-            })}
+                <div className='quiz--correct-answer' key={nanoid()}>
+                  {decodeHtmlEntity(answer)}
+                </div>
+              );
+            } else if (answer === formData[question.id]) {
+              return (
+                <div className='quiz--wrong-answer' key={nanoid()}>
+                  {decodeHtmlEntity(answer)}
+                </div>
+              );
+            }
+            return (
+              <div className='quiz--regular-answer' key={nanoid()}>
+                {decodeHtmlEntity(answer)}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -149,8 +159,12 @@ function Quiz() {
         <div className='quiz--results'>
           {answerElements}
           <div className='quiz--button-container'>
-            <p className="quiz--correct-stat">You scored {numCorrect}/{questions.length} correct answers</p>
-            <button className='quiz--answer-button' onClick={resetGame}>Play again</button>
+            <p className='quiz--correct-stat'>
+              You scored {numCorrect}/{questions.length} correct answers
+            </p>
+            <button className='quiz--answer-button' onClick={resetGame}>
+              Play again
+            </button>
           </div>
         </div>
       )}
