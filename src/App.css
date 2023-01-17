@@ -15,6 +15,7 @@ body {
   background-repeat: no-repeat;
   background-position: bottom left, top right;
   background-size: 30% 30%, 45% 45%;
+  background-attachment: fixed;
 }
 
 .blob-move {
