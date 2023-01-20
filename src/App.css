@@ -18,6 +18,15 @@ body {
   background-attachment: fixed;
 }
 
+div {
+  cursor: default;
+}
+
+button, label {
+  cursor: pointer;
+  user-select: none;
+}
+
 .blob-move {
   animation: blob-resize 1s forwards;
 }
@@ -67,7 +76,6 @@ body {
   border: none;
   font-size: 1em;
   font-weight: 500;
-  cursor: pointer;
   margin-top: 15px;
 }
 
