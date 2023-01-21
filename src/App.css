@@ -27,6 +27,10 @@ button, label {
   user-select: none;
 }
 
+ul div {
+  display: flex;
+}
+
 .blob-move {
   animation: blob-resize 1s forwards;
 }
@@ -109,7 +113,7 @@ button, label {
   display: flex;
   flex-wrap: wrap;
   column-gap: 24px;
-  row-gap: 15px;
+  row-gap: 10px;
 }
 
 .quiz--answer-list input[type="radio"] {

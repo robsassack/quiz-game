@@ -123,6 +123,10 @@ function Quiz() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    // questions not loaded yet
+    if (questions.length === 0) {
+      return;
+    }
     // not all questions answered
     if (Object.keys(formData).length < questions.length) {
       return;
