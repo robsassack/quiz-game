@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-// sample data for quiz, real questions will be fetched from api
+import loading from "../assets/90-ring.svg";
 
 function Quiz() {
   const [questionData, setQuestionData] = useState();
@@ -151,7 +151,8 @@ function Quiz() {
 
   return (
     <div className='quiz'>
-      {!showResults && (
+      {questions.length === 0 && <img className="quiz--loading" src={loading} height="100px" alt='Loading...' />}
+      {(!showResults && questions.length > 0) && (
         <form onSubmit={handleSubmit}>
           {questionElements}
           <div className='quiz--button-container'>

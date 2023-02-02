@@ -96,6 +96,11 @@ ul div {
   flex-direction: column;
 }
 
+.quiz--loading {
+  filter: invert(37%) sepia(9%) saturate(3304%) hue-rotate(192deg) brightness(89%) contrast(85%);
+  flex: 1;
+}
+
 .quiz--question-container {
   border-bottom: 1px solid #DBDEF0;
   padding: 20px 20px 32px 20px;
