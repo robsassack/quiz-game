@@ -32,10 +32,15 @@ function Quiz() {
   useEffect(() => {
     if (!questionData) return;
     const newQuestions = questionData.map((question) => {
-      const answers = shuffle([
-        ...question.incorrect_answers,
-        question.correct_answer,
-      ]);
+      let answers = '';
+      if (question.type === "boolean") {
+        answers = ["True", "False"];
+      } else {
+        answers = shuffle([
+          ...question.incorrect_answers,
+          question.correct_answer,
+        ]);
+      }
       return {
         id: nanoid(),
         question: question.question,
