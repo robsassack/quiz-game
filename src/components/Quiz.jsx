@@ -8,6 +8,8 @@ function Quiz() {
   const [formData, setFormData] = useState({});
   const [numCorrect, setNumCorrect] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [rounds, setRounds] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
 
   useEffect(() => {
     getNewQuestions();
@@ -140,6 +142,7 @@ function Quiz() {
     questions.forEach((question) => {
       if (question.correctAnswer === formData[question.id]) {
         setNumCorrect((prevNumCorrect) => prevNumCorrect + 1);
+        setTotalScore((prevTotalScore) => prevTotalScore + 1);
       }
     });
     setShowResults(true);
@@ -152,6 +155,7 @@ function Quiz() {
     setNumCorrect(0);
     setShowResults(false);
     getNewQuestions();
+    setRounds((prevRounds) => prevRounds + 1);
   }
 
   return (
@@ -170,7 +174,7 @@ function Quiz() {
           {answerElements}
           <div className='quiz--button-container'>
             <p className='quiz--correct-stat'>
-              You scored {numCorrect}/{questions.length} correct answers
+              You scored {numCorrect}/{questions.length} correct answers -  Total score: {totalScore}/{(rounds+1)*5}
             </p>
             <button className='quiz--answer-button' onClick={resetGame}>
               Play again
