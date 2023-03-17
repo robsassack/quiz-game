@@ -47,8 +47,22 @@ ul div {
 
 .App {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+}
+
+.App--center {
+  justify-content: center;
+}
+
+.App--github-container {
+  font-size: 1.75em;
+  padding-bottom: 20px;
+}
+
+.App--github-link {
+  color: #293264;
 }
 
 .landing {
@@ -57,6 +71,7 @@ ul div {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 20px;
 }
 
 .landing--title {
