@@ -165,7 +165,9 @@ function Quiz() {
         <form onSubmit={handleSubmit}>
           {questionElements}
           <div className='quiz--button-container'>
-            <button className='quiz--answer-button'>Check answers</button>
+            <button className='quiz--answer-button'
+              disabled={Object.keys(formData).length < questions.length}
+            >Check answers</button>
           </div>
         </form>
       )}
