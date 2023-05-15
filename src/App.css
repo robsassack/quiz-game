@@ -66,6 +66,10 @@ ul div {
   color: #293264;
 }
 
+.App--github-link:hover {
+  color: #4D5B9E;
+}
+
 .landing {
   display: flex;
   flex-direction: column;
