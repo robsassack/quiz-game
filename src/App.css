@@ -159,6 +159,10 @@ ul div {
   font-weight: 500;
 }
 
+.quiz--answer-label:hover {
+  background-color: #e2e5f3;
+}
+
 .quiz--answer-label:active {
   background-color: #adb2cc;
 }
