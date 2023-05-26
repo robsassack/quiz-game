@@ -16,7 +16,10 @@ function App() {
       {!quizStarted && <Landing quizStarted={startQuiz} />}
       {quizStarted && <Quiz />}
       <div className='App--github-container'>
-        <a href='https://github.com/robsassack/quiz-game'>
+        <a
+          href='https://github.com/robsassack/quiz-game'
+          aria-label='GitHub repo link'
+        >
           <i className='fa-brands fa-github App--github-link'></i>
         </a>
       </div>
