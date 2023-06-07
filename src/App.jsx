@@ -14,7 +14,7 @@ function App() {
   return (
     <div className={"App" + (quizStarted ? "" : " App--center")}>
       {!quizStarted && <Landing quizStarted={startQuiz} />}
-      {quizStarted && <Quiz />}
+      {quizStarted && <Quiz setQuizStarted={setQuizStarted} />}
       <div className='App--github-container'>
         <a
           href='https://github.com/robsassack/quiz-game'

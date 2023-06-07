@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import loading from "../assets/90-ring.svg";
 
-function Quiz() {
+function Quiz(props) {
   const [questionData, setQuestionData] = useState();
   const [questions, setQuestions] = useState([]);
   const [formData, setFormData] = useState({});
@@ -158,6 +158,16 @@ function Quiz() {
     setRounds((prevRounds) => prevRounds + 1);
   }
 
+  function quitGame() {
+    setQuestions([]);
+    setFormData({});
+    setNumCorrect(0);
+    setShowResults(false);
+    setRounds(0);
+    setTotalScore(0);
+    props.setQuizStarted(false);
+  }
+
   return (
     <div className='quiz'>
       {questions.length === 0 && <img className="quiz--loading" src={loading} height="100px" alt='Loading...' />}
@@ -180,6 +190,9 @@ function Quiz() {
             </p>
             <button className='quiz--answer-button' onClick={resetGame}>
               Play again
+            </button>
+            <button className='quiz--answer-button' onClick={quitGame}>
+              Quit
             </button>
           </div>
         </div>
